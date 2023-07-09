@@ -1,0 +1,33 @@
+// Node.js API endpoint for user authentication
+
+import { Pool } from "pg";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+export default async (req, res) => {
+  const { email, password } = req.body;
+
+  // Verify user credentials against the database
+  const client = await pool.connect();
+  const result = await client.query("SELECT * FROM users WHERE email = $1", [email]);
+  const user = result.rows[0];
+
+  if (!user || !(await bcrypt.compare(password, user.password))) {
+    res.status(401).json({ message: "Invalid credentials" });
+    return;
+  }
+
+  // Create a JWT token to authenticate the user
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+  // Set the token as a cookie and return a response
+  res.setHeader("Set-Cookie", `token=${token}; HttpOnly; Secure; SameSite=Strict`);
+  res.status(200).json({ message: "Login successful" });
+};

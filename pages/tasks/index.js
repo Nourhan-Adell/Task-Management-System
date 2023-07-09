@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import SearchTasks from "../../Components/tasks/filteredTask";
 import { getAllTasks } from "../../data/testData";
 import TasksList from "../../Components/tasks/tasksList";
+import LoginForm from "../../Components/startPages/loginForm";
 
 export default function ALLTasksPage() {
   const tasks = getAllTasks();
@@ -16,6 +17,7 @@ export default function ALLTasksPage() {
   }
   return (
     <Fragment>
+      <LoginForm />
       <SearchTasks onSearch={findTasks} />
       <TasksList items={tasks} />
     </Fragment>

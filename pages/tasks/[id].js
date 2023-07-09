@@ -23,7 +23,7 @@ export default function EventDetailsPage() {
   return (
     <Fragment>
       <TaskSummary title={task.title} />
-      <TaskLogistics fromDate={task.fromDate} toDate={task.toDate} status={task.status} />
+      <TaskLogistics fromDate={task.fromDate} creationDate={task.creationDate} endDate={task.endDate} status={task.status} />
       <TaskContent>
         <p>{task.description}</p>
       </TaskContent>

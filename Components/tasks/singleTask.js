@@ -6,16 +6,16 @@ import DateIcon from "../../icons/date-icon";
 import ArrowRightIcon from "../../icons/arrow-right-icon";
 
 export default function EventItem(props) {
-  const { id, title, fromDate, toDate } = props;
+  const { id, title, creationDate, endDate } = props;
   const exploreLink = `/tasks/${id}`;
 
-  const humanReadableFromDate = new Date(fromDate).toLocaleDateString("en-US", {
+  const humanReadableCreationDate = new Date(creationDate).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  const humanReadableToDate = new Date(toDate).toLocaleDateString("en-US", {
+  const humanReadableEndDate = new Date(endDate).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -28,11 +28,11 @@ export default function EventItem(props) {
           <h2>{title}</h2>
           <div className={classess.date}>
             <DateIcon />
-            <time>{humanReadableFromDate}</time>
+            <time>{humanReadableCreationDate}</time>
           </div>
           <div className={classess.date}>
             <DateIcon />
-            <time>{humanReadableToDate}</time>
+            <time>{humanReadableEndDate}</time>
           </div>
         </div>
         <div className={classess.actions}>

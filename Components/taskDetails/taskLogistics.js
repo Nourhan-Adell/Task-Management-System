@@ -4,14 +4,15 @@ import LogisticsTaks from "./logisticsTask";
 import classes from "./taskLogistics.module.css";
 
 export default function TaskLogistics(props) {
-  const { fromDate, toDate, status, priority } = props;
+  const { creationDate, endDate, status, priority } = props;
 
-  const humanReadableFromDate = new Date(fromDate).toLocaleDateString("en-US", {
+  const humanReadableCreationDate = new Date(creationDate).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
-  const humanReadableToDate = new Date(toDate).toLocaleDateString("en-US", {
+
+  const humanReadableendDate = new Date(endDate).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
@@ -21,12 +22,13 @@ export default function TaskLogistics(props) {
     <section className={classes.logistics}>
       <ul className={classes.list}>
         <LogisticsTaks icon={DateIcon}>
-          <time>From Date: {humanReadableFromDate}</time>
+          <time>Creation Date: {humanReadableCreationDate}</time>
         </LogisticsTaks>
 
         <LogisticsTaks icon={DateIcon}>
-          <time>To Date: {humanReadableToDate}</time>
+          <time>End Date: {humanReadableendDate}</time>
         </LogisticsTaks>
+
         <LogisticsTaks icon={CheckIcon}>status: {status}</LogisticsTaks>
       </ul>
     </section>

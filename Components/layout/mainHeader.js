@@ -8,7 +8,10 @@ export default function MainHeader() {
         <Link href="/">TMS</Link>
         <nav className={classes.navigation}>
           <ul>
-            <Link href="/events">Browes All Tasks</Link>
+            <li>
+              <Link href="/profile">Profile</Link>
+            </li>
+            {/* <button>Logout</button> */}
           </ul>
         </nav>
       </div>
